@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>氣候守護戰 2026：凱雅 vs 焚世者卡洛斯</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Inter & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Noto+Sans+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        kaia: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            glow: '#00ffaa'
+                        },
+                        calos: {
+                            50: '#fff1f2',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            glow: '#ff0044'
+                        },
+                        darkbg: '#090d16',
+                        cardbg: '#111827'
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #060911;
+            color: #f3f4f6;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Responsive Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+
+        /* Glassmorphism effects */
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(31, 41, 55, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover:not(:disabled) {
+            border-color: rgba(16, 185, 129, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.25);
+        }
+
+        /* Glow effects */
+        .glow-kaia {
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.35);
+        }
+
+        .glow-calos {
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.45);
+        }
+
+        /* Tab active state line */
+        .tab-btn.active {
+            border-bottom: 2px solid #10b981;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        /* Screen shaking animation */
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0); }
+            20% { transform: translate(-4px, 4px); }
+            40% { transform: translate(-4px, -4px); }
+            60% { transform: translate(4px, 4px); }
+            80% { transform: translate(4px, -4px); }
+        }
+        .shake-screen {
+            animation: shake 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-emerald-500 selection:text-white">
+
+    <!-- TOP HEADER / NAV BAR -->
+    <header class="w-full bg-darkbg/90 border-b border-gray-800 sticky top-0 z-30 backdrop-blur-md px-3 py-2.5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center text-emerald-400 font-black text-lg">
+                    <i class="fa-solid fa-earth-asia"></i>
+                </span>
+                <div>
+                    <h1 class="text-sm md:text-base font-black tracking-wider text-white flex items-center">
+                        氣候守護戰 <span class="ml-1.5 px-1.5 py-0.5 text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 rounded font-mono">2026</span>
+                    </h1>
+                    <p class="text-[10px] text-gray-400 hidden sm:block">香港中學文憑試 (HKDSE) 地理科氣候議題教學模擬系統</p>
+                </div>
+            </div>
+
+            <!-- Header Quick Stats -->
+            <div class="flex items-center space-x-3 text-xs md:text-sm">
+                <div class="flex items-center bg-gray-900 border border-gray-800 rounded-full px-2.5 py-1">
+                    <i class="fa-solid fa-calendar-day text-emerald-400 mr-1.5 text-xs"></i>
+                    <span class="text-gray-400 mr-1">Day</span>
+                    <span id="header-day" class="font-mono font-bold text-white">1</span>
+                    <span class="text-gray-500 text-[10px] ml-0.5">/365</span>
+                </div>
+
+                <div class="flex items-center bg-gray-900 border border-gray-800 rounded-full px-2.5 py-1">
+                    <i class="fa-solid fa-bolt text-amber-400 mr-1.5 text-xs"></i>
+                    <span class="text-gray-400 mr-1">Eco-AP</span>
+                    <span id="header-ap" class="font-mono font-bold text-amber-400">3</span>
+                    <span id="header-max-ap" class="text-gray-500 text-[10px]">/3</span>
+                </div>
+
+                <button onclick="toggleInfoModal()" class="w-8 h-8 rounded-full bg-gray-800 hover:bg-gray-700 border border-gray-700 flex items-center justify-center text-gray-300 transition" title="遊戲規則說明">
+                    <i class="fa-solid fa-circle-info text-sm"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN GAME CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-2 sm:p-4 grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-start">
+
+        <!-- LEFT COLUMN: CLIMATE DASHBOARD & AVATARS (LG: 5 cols) -->
+        <section class="lg:col-span-5 flex flex-col gap-3 sm:gap-4">
+            
+            <!-- DUAL CHARACTER AVATARS & DIALOGUE -->
+            <div class="glass-panel rounded-2xl p-3 sm:p-4 relative overflow-hidden">
+                <div class="absolute -top-12 -right-12 w-32 h-32 bg-rose-600/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-emerald-600/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div class="flex justify-between items-center gap-2 mb-3">
+                    <!-- HERO KAIA -->
+                    <div class="flex items-center space-x-2 w-1/2">
+                        <div class="relative">
+                            <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-emerald-950 border-2 border-emerald-500 flex items-center justify-center text-emerald-400 text-xl sm:text-2xl shadow-lg glow-kaia">
+                                <i class="fa-solid fa-leaf"></i>
+                            </div>
+                            <span class="absolute -bottom-1 -right-1 bg-emerald-600 text-white text-[9px] font-bold px-1 rounded-full">守護者</span>
+                        </div>
+                        <div>
+                            <div class="font-black text-sm sm:text-base text-emerald-400 leading-tight">凱雅 KAIA</div>
+                            <div class="text-[10px] text-emerald-300/80">地球自然守護者</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center font-black text-xs text-gray-600 italic px-1">VS</div>
+
+                    <!-- VILLAIN CALOS -->
+                    <div class="flex items-center justify-end space-x-2 w-1/2 text-right">
+                        <div>
+                            <div class="font-black text-sm sm:text-base text-rose-500 leading-tight">卡洛斯 CALOS</div>
+                            <div class="text-[10px] text-rose-300/80">焚世惡魔</div>
+                        </div>
+                        <div class="relative">
+                            <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-rose-950 border-2 border-rose-600 flex items-center justify-center text-rose-500 text-xl sm:text-2xl shadow-lg glow-calos">
+                                <i class="fa-solid fa-fire-flame-curved animate-pulse"></i>
+                            </div>
+                            <span class="absolute -bottom-1 -left-1 bg-rose-700 text-white text-[9px] font-bold px-1 rounded-full">增溫</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DYNAMIC DIALOGUE BOX -->
+                <div class="bg-darkbg/90 border border-gray-800 rounded-xl p-2.5 text-xs sm:text-sm min-h-[58px] flex items-center justify-center text-center relative">
+                    <i class="fa-solid fa-quote-left absolute top-1.5 left-2 text-gray-800 text-xs"></i>
+                    <p id="dialogue-text" class="text-gray-300 font-medium px-4 leading-snug">
+                        「2026年將是文明終局！我會把升溫拉抬至 +4.0°C，毀滅人類！」
+                    </p>
+                    <i class="fa-solid fa-quote-right absolute bottom-1.5 right-2 text-gray-800 text-xs"></i>
+                </div>
+            </div>
+
+            <!-- CORE TEMPERATURE & EARTH HEALTH METER -->
+            <div class="glass-panel rounded-2xl p-4 space-y-4">
+                
+                <!-- Temp Gauge Top Info -->
+                <div class="flex justify-between items-baseline">
+                    <div>
+                        <span class="text-xs text-gray-400 font-semibold block uppercase tracking-wider">全球平均升溫幅度和</span>
+                        <span class="text-[10px] text-gray-500">（基準：工業化前 1850-1900 平均）</span>
+                    </div>
+                    <div id="temp-status-badge" class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-950 text-emerald-400 border border-emerald-700">
+                        安全控制中
+                    </div>
+                </div>
+
+                <!-- Temp Main Value Display -->
+                <div class="text-center py-1">
+                    <div id="temp-value-display" class="text-4xl sm:text-5xl font-black font-mono tracking-tight text-emerald-400 transition-all duration-500">
+                        +1.200 <span class="text-xl sm:text-2xl font-normal text-gray-400">°C</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs text-gray-400 mt-1 px-1">
+                        <span>預估每日自然升溫增幅:</span>
+                        <span id="daily-rate-display" class="font-mono font-bold text-rose-400">+0.0020 °C/日</span>
+                    </div>
+                </div>
+
+                <!-- Visual Thermometer Progress Bar -->
+                <div class="space-y-1">
+                    <div class="w-full bg-gray-900 h-5 rounded-full p-0.5 border border-gray-800 relative overflow-hidden">
+                        <!-- Threshold Markers -->
+                        <div class="absolute inset-0 flex justify-between px-2 items-center text-[9px] font-mono text-gray-400 z-10 pointer-events-none">
+                            <span class="left-[8%]">1.5°C</span>
+                            <span class="left-[28%]">2.0°C</span>
+                            <span class="left-[48%]">2.5°C</span>
+                            <span class="left-[68%]">3.0°C</span>
+                            <span class="right-[2%] font-bold text-rose-500">4.0°C</span>
+                        </div>
+                        <!-- Bar Fill -->
+                        <div id="temp-bar-fill" class="h-full rounded-full bg-gradient-to-r from-emerald-500 via-amber-500 to-rose-600 transition-all duration-500" style="width: 5%;"></div>
+                    </div>
+                    <div class="flex justify-between text-[10px] text-gray-500 font-mono px-1">
+                        <span>1.2°C (目前)</span>
+                        <span class="text-emerald-400">巴黎協定 1.5°C</span>
+                        <span class="text-rose-500 font-bold">4.0°C (文明滅絕)</span>
+                    </div>
+                </div>
+
+                <!-- CIVILIZATION RESILIENCE / TRUST METER -->
+                <div class="pt-2 border-t border-gray-800/80 space-y-1.5">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-gray-300 font-bold flex items-center">
+                            <i class="fa-solid fa-shield-halved text-cyan-400 mr-1.5"></i> 全球氣候韌性 / 文明信心值
+                        </span>
+                        <span id="trust-value-display" class="font-mono font-bold text-cyan-400">100%</span>
+                    </div>
+                    <div class="w-full bg-gray-900 h-3 rounded-full overflow-hidden border border-gray-800">
+                        <div id="trust-bar-fill" class="h-full bg-cyan-500 transition-all duration-500 rounded-full" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <!-- ENVIRONMENTAL INDICATORS GRID -->
+                <div class="grid grid-cols-3 gap-2 pt-2 border-t border-gray-800/80 text-center">
+                    <div class="bg-gray-900/80 border border-gray-800 rounded-lg p-2">
+                        <div class="text-[10px] text-gray-400 mb-0.5"><i class="fa-solid fa-cloud text-gray-400 mr-1"></i>CO₂ 濃度</div>
+                        <div id="co2-value" class="font-mono font-bold text-xs sm:text-sm text-gray-200">421 ppm</div>
+                    </div>
+                    <div class="bg-gray-900/80 border border-gray-800 rounded-lg p-2">
+                        <div class="text-[10px] text-gray-400 mb-0.5"><i class="fa-solid fa-fire text-amber-500 mr-1"></i>甲烷水平</div>
+                        <div id="methane-value" class="font-mono font-bold text-xs sm:text-sm text-amber-400">1910 ppb</div>
+                    </div>
+                    <div class="bg-gray-900/80 border border-gray-800 rounded-lg p-2">
+                        <div class="text-[10px] text-gray-400 mb-0.5"><i class="fa-solid fa-sun text-yellow-400 mr-1"></i>地表反照率</div>
+                        <div id="albedo-value" class="font-mono font-bold text-xs sm:text-sm text-yellow-300">0.300</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TIPPING POINTS ACTIVE STATUS -->
+            <div class="glass-panel rounded-2xl p-3 sm:p-4">
+                <h3 class="text-xs font-bold text-gray-300 uppercase tracking-wider mb-2 flex items-center justify-between">
+                    <span><i class="fa-solid fa-triangle-exclamation text-rose-500 mr-1.5"></i>關鍵氣候臨界點 (Tipping Points)</span>
+                    <span class="text-[10px] font-normal text-gray-500">觸發後不可逆</span>
+                </h3>
+                <div id="tipping-list" class="space-y-1.5">
+                    <!-- Dynamic Tipping Point Items generated by JS -->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- RIGHT COLUMN: ACTION PILLARS & EVENT LOGS (LG: 7 cols) -->
+        <section class="lg:col-span-7 flex flex-col gap-3 sm:gap-4">
+            
+            <!-- ACTION SELECTION TABS & CARDS -->
+            <div class="glass-panel rounded-2xl p-3 sm:p-4 flex flex-col min-h-[420px]">
+                
+                <!-- Category Tabs -->
+                <div class="flex border-b border-gray-800 mb-3 overflow-x-auto no-scrollbar gap-1">
+                    <button onclick="switchTab('p1')" id="tab-p1" class="tab-btn active px-3 py-2 text-xs font-bold rounded-t-lg transition whitespace-nowrap flex items-center">
+                        <i class="fa-solid fa-atom mr-1.5 text-cyan-400"></i>地球工程
+                    </button>
+                    <button onclick="switchTab('p2')" id="tab-p2" class="tab-btn px-3 py-2 text-xs font-bold text-gray-400 hover:text-gray-200 rounded-t-lg transition whitespace-nowrap flex items-center">
+                        <i class="fa-solid fa-tree mr-1.5 text-emerald-400"></i>生態碳匯
+                    </button>
+                    <button onclick="switchTab('p3')" id="tab-p3" class="tab-btn px-3 py-2 text-xs font-bold text-gray-400 hover:text-gray-200 rounded-t-lg transition whitespace-nowrap flex items-center">
+                        <i class="fa-solid fa-solar-panel mr-1.5 text-amber-400"></i>能源轉型
+                    </button>
+                    <button onclick="switchTab('p4')" id="tab-p4" class="tab-btn px-3 py-2 text-xs font-bold text-gray-400 hover:text-gray-200 rounded-t-lg transition whitespace-nowrap flex items-center">
+                        <i class="fa-solid fa-city mr-1.5 text-indigo-400"></i>氣候調適
+                    </button>
+                </div>
+
+                <!-- Tab Pillar Description Header -->
+                <div id="pillar-desc" class="text-xs text-gray-400 bg-gray-900/60 p-2.5 rounded-lg border border-gray-800 mb-3">
+                    <!-- Dynamic pillar description text -->
+                </div>
+
+                <!-- Action Cards Container Grid -->
+                <div id="cards-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 flex-1 overflow-y-auto max-h-[380px] pr-1">
+                    <!-- Dynamic Action Cards rendered by JS -->
+                </div>
+
+                <!-- Bottom Execution Bar / Pass Day Controller -->
+                <div class="mt-4 pt-3 border-t border-gray-800 flex items-center justify-between gap-3">
+                    <div class="text-xs text-gray-400 flex items-center">
+                        <i class="fa-solid fa-circle-info text-emerald-400 mr-1.5"></i>
+                        <span>每做出一項決策將消耗 <strong class="text-amber-400">Eco-AP</strong></span>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <button onclick="advanceDays(1)" class="px-3 py-2.5 bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg glow-kaia transition flex items-center">
+                            <span>進入下一天</span>
+                            <i class="fa-solid fa-chevron-right ml-1.5 text-xs"></i>
+                        </button>
+                        <button onclick="advanceDays(10)" class="px-3 py-2.5 bg-gray-800 hover:bg-gray-700 active:scale-95 text-gray-300 font-bold text-xs rounded-xl border border-gray-700 transition" title="快進10天">
+                            <i class="fa-solid fa-forward-fast mr-1"></i> +10天
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CHRONOLOGICAL EVENT & ACTION LOG -->
+            <div class="glass-panel rounded-2xl p-3 sm:p-4 flex flex-col h-48">
+                <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2">
+                    <h3 class="text-xs font-bold text-gray-300 uppercase tracking-wider flex items-center">
+                        <i class="fa-solid fa-list-check text-emerald-400 mr-1.5"></i>地球環境與決策日誌 (Log)
+                    </h3>
+                    <span class="text-[10px] text-gray-500">地理學術概念簡釋</span>
+                </div>
+                <div id="event-log" class="flex-1 overflow-y-auto space-y-2 pr-1 text-xs">
+                    <div class="text-gray-500 text-center py-4">2026 年 1 月 1 日：氣候終局對決正式開始。請選擇守護卡牌。</div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- GEOGRAPHY CONCEPT MODAL (CLICKABLE CONCEPT EXPLANATION) -->
+    <div id="concept-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel border-gray-700 rounded-2xl max-w-lg w-full p-5 space-y-4 relative animate-fade-in">
+            <button onclick="closeConceptModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="flex items-center space-x-2">
+                <span class="p-2 bg-emerald-950 text-emerald-400 border border-emerald-700 rounded-lg text-lg">
+                    <i id="concept-icon" class="fa-solid fa-book-open"></i>
+                </span>
+                <h3 id="concept-title" class="text-base font-bold text-white">地理學術概念說明</h3>
+            </div>
+            <div id="concept-body" class="text-xs sm:text-sm text-gray-300 leading-relaxed space-y-2 max-h-[60vh] overflow-y-auto pr-2">
+                <!-- Concept Content inserted dynamically -->
+            </div>
+            <div class="pt-2 border-t border-gray-800 text-right">
+                <button onclick="closeConceptModal()" class="px-4 py-2 bg-emerald-600 text-white font-bold text-xs rounded-lg hover:bg-emerald-500">理解並關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAME OVER / VICTORY SUMMARY MODAL -->
+    <div id="end-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel border-2 rounded-2xl max-w-xl w-full p-6 text-center space-y-5 relative" id="end-card-box">
+            
+            <div id="end-rank-badge" class="w-20 h-20 mx-auto rounded-full flex items-center justify-center text-3xl font-black shadow-2xl border-2">
+                S
+            </div>
+
+            <div>
+                <h2 id="end-title" class="text-2xl sm:text-3xl font-black text-white mb-1">氣候守護評估結局</h2>
+                <p id="end-subtitle" class="text-xs sm:text-sm text-gray-400">2026年365天總結報告</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-gray-900/80 p-3 rounded-xl border border-gray-800 text-left text-xs">
+                <div>
+                    <span class="text-gray-500 block">最終溫升</span>
+                    <span id="end-temp" class="font-mono font-bold text-sm text-emerald-400">+1.45°C</span>
+                </div>
+                <div>
+                    <span class="text-gray-500 block">文明韌性</span>
+                    <span id="end-trust" class="font-mono font-bold text-sm text-cyan-400">85%</span>
+                </div>
+                <div>
+                    <span class="text-gray-500 block">二氧化碳</span>
+                    <span id="end-co2" class="font-mono font-bold text-sm text-gray-300">415 ppm</span>
+                </div>
+                <div>
+                    <span class="text-gray-500 block">地表反照率</span>
+                    <span id="end-albedo" class="font-mono font-bold text-sm text-yellow-300">0.298</span>
+                </div>
+            </div>
+
+            <p id="end-evaluation" class="text-xs sm:text-sm text-gray-300 text-left bg-darkbg p-3.5 rounded-xl border border-gray-800 leading-relaxed">
+                <!-- Detailed HKDSE Geography style commentary -->
+            </p>
+
+            <button onclick="resetGame()" class="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl shadow-lg transition">
+                <i class="fa-solid fa-rotate-right mr-2"></i>重新開始 2026 守護之旅
+            </button>
+        </div>
+    </div>
+
+    <!-- GAME RULES / INFO MODAL -->
+    <div id="info-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel border-gray-700 rounded-2xl max-w-lg w-full p-5 space-y-4 relative">
+            <button onclick="toggleInfoModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-base font-bold text-white flex items-center">
+                <i class="fa-solid fa-gamepad text-emerald-400 mr-2"></i>遊戲規則與地理教學目標
+            </h3>
+            <div class="text-xs text-gray-300 space-y-2.5 leading-relaxed">
+                <p><strong>1. 遊戲目標：</strong> 操控英雄「凱雅」，在2026年365天內遏止惡魔「卡洛斯」將全球平均升溫拉抬至 +4.0°C。盡量將升溫控制在 <strong class="text-emerald-400">+1.5°C ~ +2.0°C</strong> 內，且維持文明信心值高於 0%。</p>
+                <p><strong>2. 行動點數 (Eco-AP)：</strong> 每日擁有最高 3 點 AP。每項決策需要消耗 AP 並且有短中期氣候效益與副效果。</p>
+                <p><strong>3. 四大戰略柱 (4 Pillars)：</strong> 涵蓋黑碳清洗（提升反照率 Albedo）、甲烷捕捉（阻絕正回饋）、藍碳與造林（增強自然碳匯）、零碳能源與極限濕球調適。</p>
+                <p><strong>4. 氣候臨界點 (Tipping Points)：</strong> 當升溫達 1.5°C、2.0°C、2.5°C、3.0°C 時，會爆發不可逆災難（如永凍層融化釋放甲烷、亞馬遜雨林枯死），大幅增加每日自然增溫速度！</p>
+            </div>
+            <div class="pt-2 border-t border-gray-800 text-right">
+                <button onclick="toggleInfoModal()" class="px-4 py-2 bg-emerald-600 text-white font-bold text-xs rounded-lg">明白了</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- GAME LOGIC & ENGINE JAVASCRIPT -->
+    <script>
+        // INITIAL GAME STATE
+        let state = {
+            day: 1,
+            maxDays: 365,
+            temp: 1.200, // starting temp anomaly +1.2°C
+            targetLimit: 4.0, // defeat temp
+            ap: 3,
+            maxAp: 3,
+            trust: 100, // Civilizational Resilience %
+            co2: 421, // ppm
+            methane: 1910, // ppb
+            albedo: 0.300, // reflectivity (0.000 - 1.000)
+            activePillar: 'p1',
+            tippingPointsTriggered: {
+                tp15: false,
+                tp20: false,
+                tp25: false,
+                tp30: false
+            }
+        };
+
+        // PILLAR DESCRIPTIONS
+        const pillarDescs = {
+            p1: '【柱一：地球工程與大氣修復】直接介入大氣與極地物理屬性。優點：短期降溫快；代價：高昂 AP 或副效果。',
+            p2: '【柱二：生態碳匯與土地調適】利用自然解方 (Nature-Based Solutions) 強化陸地與海洋生物碳泵，持久鎖碳。',
+            p3: '【柱三：能源與經濟轉型】從源頭推動零碳能源與碳定價政策，持續降低 CO₂ 累積速度。',
+            p4: '【柱四：氣候韌性與災害適應】提升人類社會面對極端高溫、糧食危機與海平面上升的適應能力（維持文明信心值）。'
+        };
+
+        // ACTION CARDS DATABASE (2026 GEOGRAPHY CURRICULUM ACCORDING)
+        const cardsData = [
+            // Pillar 1: Geoengineering
+            {
+                id: 'p1_1',
+                pillar: 'p1',
+                title: '極地黑碳清洗術',
+                cost: 2,
+                icon: 'fa-snowflake',
+                color: 'text-cyan-400',
+                desc: '部署無人機清理北極海冰與冰原上的黑碳（煤煙），恢復高反射率。',
+                geographyConcept: '【地表反照率 (Albedo)】\n冰雪反照率高達 0.8-0.9。黑碳沉降會吸收太陽短波輻射並加速冰川融化。清洗黑碳能提高地表反射率，直接減少熱量吸收。',
+                effect: () => {
+                    state.albedo = Math.min(0.350, state.albedo + 0.008);
+                    addLog('【地球工程】成功清理極地黑碳，地表反照率 (Albedo) 提升至 ' + state.albedo.toFixed(3), 'kaia');
+                }
+            },
+            {
+                id: 'p1_2',
+                pillar: 'p1',
+                title: '永凍層甲烷催化捕捉塔',
+                cost: 2,
+                icon: 'fa-filter-circle-xmark',
+                color: 'text-amber-400',
+                desc: '在高緯度沼澤與解凍永凍層大規模部署甲烷光催化分解裝置。',
+                geographyConcept: '【甲烷正回饋循環 (Methane Feedback)】\n甲烷 (CH₄) 溫室效應為 CO₂ 的 28-84 倍。高緯度永凍層解凍會引發巨量甲烷釋放，造成劇烈正回饋。',
+                effect: () => {
+                    state.methane = Math.max(1700, state.methane - 80);
+                    addLog('【大氣修復】永凍層捕捉塔啟動，大氣甲烷濃度下降 80 ppb。', 'kaia');
+                }
+            },
+            {
+                id: 'p1_3',
+                pillar: 'p1',
+                title: '平流層氣膠急救遮陽',
+                cost: 3,
+                icon: 'fa-cloud-sun',
+                color: 'text-rose-400',
+                desc: '在極地平流層注入可控氣膠微粒，模擬火山噴發遮蔽部分陽光。',
+                geographyConcept: '【太陽輻射管理 (SRM)】\n模仿火山爆發（陽光遮蔽效應 Global Dimming）。能極快拉低溫度，但無法解決海洋酸化，且可能干擾全球季風與降水模式。',
+                effect: () => {
+                    state.temp = Math.max(1.0, state.temp - 0.08);
+                    state.trust = Math.max(0, state.trust - 5); // Side effect: Public skepticism
+                    addLog('【緊急地球工程】平流層氣膠成功反射輻射，瞬間降溫 -0.08°C！（文明信心微幅下降 -5%）', 'warning');
+                }
+            },
+
+            // Pillar 2: Nature-Based Solutions
+            {
+                id: 'p2_1',
+                pillar: 'p2',
+                title: '藍碳海洋生態復育',
+                cost: 2,
+                icon: 'fa-water',
+                color: 'text-emerald-400',
+                desc: '修復紅樹林、海草床與鹽沼，重建海洋生物碳泵 (Biological Carbon Pump)。',
+                geographyConcept: '【藍碳 (Blue Carbon)】\n沿海濕地與海洋生態系封存碳的速度比陸地森林快近10倍。維護藍碳能有效將碳鎖定於海底沉積物中。',
+                effect: () => {
+                    state.co2 = Math.max(380, state.co2 - 6);
+                    state.trust = Math.min(100, state.trust + 3);
+                    addLog('【生態碳匯】藍碳復育完成，海洋鎖碳能力增強，CO₂ 降低 6 ppm。', 'kaia');
+                }
+            },
+            {
+                id: 'p2_2',
+                pillar: 'p2',
+                title: '亞馬遜雨林智慧防火牆',
+                cost: 2,
+                icon: 'fa-shield-cat',
+                color: 'text-green-500',
+                desc: '聯合原住民社區與 AI 衛星網絡，阻絕毀林開荒與大規模森林火災。',
+                geographyConcept: '【陸地碳匯與森林砍伐】\n亞馬遜熱帶雨林是全球最大碳匯。砍伐與火災會使其從「吸碳者」轉變為巨大的「碳排放源」。',
+                effect: () => {
+                    state.co2 = Math.max(380, state.co2 - 8);
+                    addLog('【土地調適】亞馬遜保護網封鎖濫伐，避免巨量碳排放，CO₂ 降低 8 ppm。', 'kaia');
+                }
+            },
+            {
+                id: 'p2_3',
+                pillar: 'p2',
+                title: '全球再生農業與退耕還林',
+                cost: 1,
+                icon: 'fa-seedling',
+                color: 'text-lime-400',
+                desc: '推廣免耕農業與植樹造林，提升土壤有機碳（Soil Carbon Sink）。',
+                geographyConcept: '【土壤固碳 (Soil Carbon Sequestration)】\n健康土壤儲存全球超過一半的陸地碳。再生農業可阻止土壤侵蝕並持續吸碳。',
+                effect: () => {
+                    state.co2 = Math.max(380, state.co2 - 3);
+                    addLog('【再生農業】全球推廣免耕法，土壤有機碳庫持續回升。', 'kaia');
+                }
+            },
+
+            // Pillar 3: Decarbonization & Policy
+            {
+                id: 'p3_1',
+                pillar: 'p3',
+                title: '零碳能源電網閃電戰',
+                cost: 2,
+                icon: 'fa-solar-panel',
+                color: 'text-amber-400',
+                desc: '全面部署光伏、風力與地熱能，強行替換燃煤發電廠。',
+                geographyConcept: '【脫碳 (Decarbonization)】\n化石燃料燃燒是大氣 CO₂ 增加的主要人為來源。轉向再生能源是遏止氣候變遷的根基。',
+                effect: () => {
+                    state.co2 = Math.max(380, state.co2 - 10);
+                    addLog('【能源轉型】關閉大量燃煤電廠，大幅減少全球每日人為碳排放。', 'kaia');
+                }
+            },
+            {
+                id: 'p3_2',
+                pillar: 'p3',
+                title: '全球碳邊境調整機制 (CBAM)',
+                cost: 1,
+                icon: 'fa-scale-balanced',
+                color: 'text-indigo-400',
+                desc: '對高排放進口產品徵收嚴格碳關稅，倒逼全球供應鏈綠色轉型。',
+                geographyConcept: '【碳定價與經濟工具】\n將碳排放外部成本內部化，促使跨國企業投資低碳技術。',
+                effect: () => {
+                    state.trust = Math.min(100, state.trust + 5);
+                    state.co2 = Math.max(380, state.co2 - 4);
+                    addLog('【氣候政策】全球碳關稅生效，供應鏈加速去碳化，文明信心 +5%。', 'kaia');
+                }
+            },
+
+            // Pillar 4: Resilience & Adaptation
+            {
+                id: 'p4_1',
+                pillar: 'p4',
+                title: '極限濕球溫度防護盾',
+                cost: 2,
+                icon: 'fa-temperature-arrow-down',
+                color: 'text-cyan-300',
+                desc: '在熱帶高危區域建置綠色冷卻避難所與海水淡化網絡。',
+                geographyConcept: '【濕球溫度 (Wet-Bulb Temperature)】\n當濕球溫度超過 35°C 時，人體無法透過排汗散熱，數小時內即有生命危險。這屬於氣候調適 (Adaptation)。',
+                effect: () => {
+                    state.trust = Math.min(100, state.trust + 12);
+                    addLog('【適應調適】濕球高溫避難網絡啟用，有效避免大規模熱浪災難，文明信心 +12%！', 'kaia');
+                }
+            },
+            {
+                id: 'p4_2',
+                pillar: 'p4',
+                title: '抗旱作物與氣候包容性糧倉',
+                cost: 1,
+                icon: 'fa-wheat-awn',
+                color: 'text-yellow-500',
+                desc: '推廣基因編輯抗旱作物，保障全球糧食安全防線。',
+                geographyConcept: '【糧食安全與氣候韌性】\n氣候變遷引發乾旱與極端降雨，導致主要糧倉減產。普及抗旱作物能預防氣候引發的社會動盪。',
+                effect: () => {
+                    state.trust = Math.min(100, state.trust + 8);
+                    addLog('【糧食韌性】抗旱作物收成良好，防止全球糧食危機，文明信心 +8%。', 'kaia');
+                }
+            }
+        ];
+
+        // TIPPING POINTS DEFINITIONS
+        const tippingPoints = [
+            { id: 'tp15', temp: 1.5, name: '全球熱帶珊瑚礁大規模死亡', desc: '海洋生態系解體，生物碳泵削弱。', triggerMsg: '【臨界點爆發】升溫達 +1.5°C！全球 90% 珊瑚礁白化死亡，海洋碳匯崩潰！' },
+            { id: 'tp20', temp: 2.0, name: '北極夏季海冰完全融化', desc: '喪失冰雪反照率，海洋大幅吸收太陽能。', triggerMsg: '【臨界點爆發】升溫達 +2.0°C！北極海冰完全消失，地表反照率 (Albedo) 永久性下降！' },
+            { id: 'tp25', temp: 2.5, name: '西伯利亞永凍層爆炸性解凍', desc: '巨量泥炭與甲烷釋放，引發失控正回饋。', triggerMsg: '【臨界點爆發】升溫達 +2.5°C！永凍層釋放巨量甲烷，每日升溫速度翻倍！' },
+            { id: 'tp30', temp: 3.0, name: '亞馬遜雨林轉變為荒漠', desc: '陸地最大碳匯枯死，轉為巨型碳源。', triggerMsg: '【臨界點爆發】升溫達 +3.0°C！亞馬遜雨林崩塌轉為荒漠，大氣 CO₂ 濃度暴增！' }
+        ];
+
+        // CALOS TAUNTS / DIALOGUE SYSTEM
+        function updateCalosDialogue() {
+            const dialogueEl = document.getElementById('dialogue-text');
+            if (state.temp < 1.5) {
+                const taunts = [
+                    "「凱雅，你以為能擋下我的熱浪嗎？2026 年才剛開始！」",
+                    "「化石燃料的貪婪是我的養分，增溫是不可逆轉的！」",
+                    "「留意 1.5°C 的門檻，過線之後自然會幫我毀滅文明！」"
+                ];
+                dialogueEl.innerText = taunts[Math.floor(Math.random() * taunts.length)];
+            } else if (state.temp < 2.5) {
+                dialogueEl.innerHTML = `<span class="text-rose-400 font-bold">「哈哈！臨界點已經打開！極地冰川正在融化，你擋得住正回饋嗎？」</span>`;
+            } else if (state.temp < 3.5) {
+                dialogueEl.innerHTML = `<span class="text-rose-500 font-black animate-pulse">「這就是終局！濕球高溫正在吞噬城市，人類文明即將解體！」</span>`;
+            } else {
+                dialogueEl.innerHTML = `<span class="text-rose-600 font-black">「4.0°C 到了！毀滅吧，這個脆弱的世界！」</span>`;
+            }
+        }
+
+        // CALCULATE DAILY NATURAL WARMING RATE
+        function calculateDailyRate() {
+            // Base warming rate
+            let rate = 0.0015;
+
+            // CO2 effect
+            rate += (state.co2 - 350) * 0.000015;
+
+            // Methane effect (strong warming power)
+            rate += (state.methane - 1700) * 0.000008;
+
+            // Albedo effect (Lower albedo = absorbs more radiation)
+            rate += (0.320 - state.albedo) * 0.025;
+
+            // Multipliers from triggered tipping points
+            if (state.tippingPointsTriggered.tp25) rate *= 1.4; // Permafrost methane spike
+            if (state.tippingPointsTriggered.tp30) rate *= 1.5; // Amazon dieback
+
+            return Math.max(0.0001, rate);
+        }
+
+        // RENDER UI & COMPONENTS
+        function renderUI() {
+            // Header Stats
+            document.getElementById('header-day').innerText = state.day;
+            document.getElementById('header-ap').innerText = state.ap;
+            document.getElementById('header-max-ap').innerText = '/' + state.maxAp;
+
+            // Temp Value Display
+            const tempEl = document.getElementById('temp-value-display');
+            tempEl.innerText = `+${state.temp.toFixed(3)} °C`;
+            
+            // Daily Rate
+            const rate = calculateDailyRate();
+            document.getElementById('daily-rate-display').innerText = `+${rate.toFixed(4)} °C/日`;
+
+            // Temp Bar Progress Fill
+            // Range: 1.2°C to 4.0°C (span 2.8°C)
+            let percent = ((state.temp - 1.2) / 2.8) * 100;
+            percent = Math.min(100, Math.max(2, percent));
+            const barFill = document.getElementById('temp-bar-fill');
+            barFill.style.width = `${percent}%`;
+
+            // Temp Status Badge & Colors
+            const badge = document.getElementById('temp-status-badge');
+            if (state.temp < 1.5) {
+                badge.innerText = '1.5°C 防線守護中';
+                badge.className = 'px-2 py-0.5 rounded text-xs font-bold bg-emerald-950 text-emerald-400 border border-emerald-700';
+                tempEl.className = 'text-4xl sm:text-5xl font-black font-mono tracking-tight text-emerald-400 transition-all duration-500';
+            } else if (state.temp < 2.0) {
+                badge.innerText = '巴黎協定警戒 (Warning)';
+                badge.className = 'px-2 py-0.5 rounded text-xs font-bold bg-amber-950 text-amber-400 border border-amber-700';
+                tempEl.className = 'text-4xl sm:text-5xl font-black font-mono tracking-tight text-amber-400 transition-all duration-500';
+            } else if (state.temp < 3.0) {
+                badge.innerText = '臨界點連鎖危機 (Crisis)';
+                badge.className = 'px-2 py-0.5 rounded text-xs font-bold bg-rose-950 text-rose-400 border border-rose-700 animate-pulse';
+                tempEl.className = 'text-4xl sm:text-5xl font-black font-mono tracking-tight text-rose-400 transition-all duration-500';
+            } else {
+                badge.innerText = '文明生存危機 (Existential Risk)';
+                badge.className = 'px-2 py-0.5 rounded text-xs font-bold bg-red-900 text-white border border-red-500 animate-bounce';
+                tempEl.className = 'text-4xl sm:text-5xl font-black font-mono tracking-tight text-rose-600 transition-all duration-500';
+            }
+
+            // Trust / Resilience Bar
+            document.getElementById('trust-value-display').innerText = `${Math.round(state.trust)}%`;
+            const trustBar = document.getElementById('trust-bar-fill');
+            trustBar.style.width = `${Math.max(0, state.trust)}%`;
+            if (state.trust < 30) {
+                trustBar.className = 'h-full bg-rose-600 transition-all duration-500 rounded-full animate-pulse';
+            } else if (state.trust < 60) {
+                trustBar.className = 'h-full bg-amber-500 transition-all duration-500 rounded-full';
+            } else {
+                trustBar.className = 'h-full bg-cyan-500 transition-all duration-500 rounded-full';
+            }
+
+            // Environment Indicators
+            document.getElementById('co2-value').innerText = `${Math.round(state.co2)} ppm`;
+            document.getElementById('methane-value').innerText = `${Math.round(state.methane)} ppb`;
+            document.getElementById('albedo-value').innerText = state.albedo.toFixed(3);
+
+            // Pillar Description Header
+            document.getElementById('pillar-desc').innerText = pillarDescs[state.activePillar];
+
+            // Render Tipping Points Status
+            renderTippingPointsUI();
+
+            // Render Action Cards
+            renderCardsGridUI();
+        }
+
+        // RENDER TIPPING POINTS LIST
+        function renderTippingPointsUI() {
+            const container = document.getElementById('tipping-list');
+            container.innerHTML = '';
+
+            tippingPoints.forEach(tp => {
+                const isTriggered = state.tippingPointsTriggered[tp.id];
+                const item = document.createElement('div');
+                item.className = `p-2 rounded-lg border text-xs flex items-center justify-between transition ${
+                    isTriggered 
+                        ? 'bg-rose-950/40 border-rose-800/80 text-rose-300' 
+                        : 'bg-gray-900/40 border-gray-800 text-gray-500'
+                }`;
+
+                item.innerHTML = `
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid ${isTriggered ? 'fa-triangle-exclamation text-rose-500 animate-pulse' : 'fa-lock text-gray-600'}"></i>
+                        <div>
+                            <span class="font-bold block">${tp.name} (${tp.temp}°C)</span>
+                            <span class="text-[10px] opacity-75">${tp.desc}</span>
+                        </div>
+                    </div>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded font-mono ${isTriggered ? 'bg-rose-900 text-rose-200' : 'bg-gray-800 text-gray-600'}">
+                        ${isTriggered ? '已失控破裂' : '安全'}
+                    </span>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // RENDER CARDS GRID FOR CURRENT ACTIVE PILLAR
+        function renderCardsGridUI() {
+            const grid = document.getElementById('cards-grid');
+            grid.innerHTML = '';
+
+            const pillarCards = cardsData.filter(c => c.pillar === state.activePillar);
+
+            pillarCards.forEach(card => {
+                const canAfford = state.ap >= card.cost;
+                const cardEl = document.createElement('button');
+                cardEl.disabled = !canAfford;
+                cardEl.onclick = () => playCard(card);
+                cardEl.className = `glass-card text-left p-3 rounded-xl flex flex-col justify-between relative group ${
+                    canAfford ? 'opacity-100 cursor-pointer' : 'opacity-40 cursor-not-allowed'
+                }`;
+
+                cardEl.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-1.5">
+                            <div class="font-bold text-xs sm:text-sm text-gray-100 flex items-center">
+                                <i class="fa-solid ${card.icon} ${card.color} mr-1.5"></i>${card.title}
+                            </div>
+                            <span class="px-2 py-0.5 text-[10px] font-mono font-bold rounded-full bg-gray-900 text-amber-400 border border-amber-500/30">
+                                -${card.cost} AP
+                            </span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 leading-snug mb-2">${card.desc}</p>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-2 border-t border-gray-800/60 mt-1">
+                        <button onclick="event.stopPropagation(); showConceptModal('${card.title}', '${encodeURIComponent(card.geographyConcept)}')" class="text-[10px] text-emerald-400 hover:underline flex items-center">
+                            <i class="fa-solid fa-graduation-cap mr-1"></i>地理概念簡釋
+                        </button>
+                        <span class="text-[10px] font-bold text-emerald-400 group-hover:translate-x-0.5 transition-transform">
+                            執行 <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                        </span>
+                    </div>
+                `;
+                grid.appendChild(cardEl);
+            });
+        }
+
+        // SWITCH PILLAR TABS
+        function switchTab(pillarId) {
+            state.activePillar = pillarId;
+            ['p1', 'p2', 'p3', 'p4'].forEach(id => {
+                const btn = document.getElementById(`tab-${id}`);
+                if (id === pillarId) {
+                    btn.className = 'tab-btn active px-3 py-2 text-xs font-bold rounded-t-lg transition whitespace-nowrap flex items-center';
+                } else {
+                    btn.className = 'tab-btn px-3 py-2 text-xs font-bold text-gray-400 hover:text-gray-200 rounded-t-lg transition whitespace-nowrap flex items-center';
+                }
+            });
+            renderUI();
+        }
+
+        // PLAY A CARD
+        function playCard(card) {
+            if (state.ap < card.cost) return;
+
+            state.ap -= card.cost;
+            card.effect();
+            renderUI();
+        }
+
+        // ADVANCE GAME DAYS
+        function advanceDays(numDays = 1) {
+            for (let i = 0; i < numDays; i++) {
+                if (state.day >= state.maxDays || state.temp >= state.targetLimit || state.trust <= 0) break;
+
+                // 1. Calculate and add natural warming
+                const dailyWarming = calculateDailyRate();
+                state.temp += dailyWarming;
+
+                // 2. Check Tipping Points
+                checkTippingPoints();
+
+                // 3. Advance Day & Reset AP
+                state.day++;
+                state.ap = state.maxAp;
+
+                // 4. Slight Trust Decay if temperature is too high
+                if (state.temp > 2.5) {
+                    state.trust = Math.max(0, state.trust - 0.4);
+                } else if (state.temp > 2.0) {
+                    state.trust = Math.max(0, state.trust - 0.2);
+                }
+            }
+
+            updateCalosDialogue();
+            renderUI();
+
+            // Check End Game conditions
+            if (state.temp >= state.targetLimit) {
+                triggerEndGame('defeat_temp');
+            } else if (state.trust <= 0) {
+                triggerEndGame('defeat_trust');
+            } else if (state.day >= state.maxDays) {
+                triggerEndGame('victory');
+            }
+        }
+
+        // CHECK TIPPING POINT TRIGGERS
+        function checkTippingPoints() {
+            tippingPoints.forEach(tp => {
+                if (!state.tippingPointsTriggered[tp.id] && state.temp >= tp.temp) {
+                    state.tippingPointsTriggered[tp.id] = true;
+                    addLog(tp.triggerMsg, 'danger');
+                    
+                    // Direct penalty effects
+                    if (tp.id === 'tp15') state.co2 += 12;
+                    if (tp.id === 'tp20') state.albedo -= 0.012;
+                    if (tp.id === 'tp25') state.methane += 250;
+                    if (tp.id === 'tp30') state.co2 += 25;
+
+                    document.body.classList.add('shake-screen');
+                    setTimeout(() => document.body.classList.remove('shake-screen'), 400);
+                }
+            });
+        }
+
+        // EVENT LOG SYSTEM
+        function addLog(msg, type = 'normal') {
+            const logContainer = document.getElementById('event-log');
+            const entry = document.createElement('div');
+            entry.className = 'p-2 rounded-lg bg-gray-900/80 border border-gray-800 text-xs flex items-start space-x-2 leading-relaxed';
+
+            let icon = '<i class="fa-solid fa-circle-info text-blue-400 mt-0.5"></i>';
+            if (type === 'kaia') icon = '<i class="fa-solid fa-leaf text-emerald-400 mt-0.5"></i>';
+            if (type === 'warning') icon = '<i class="fa-solid fa-triangle-exclamation text-amber-400 mt-0.5"></i>';
+            if (type === 'danger') icon = '<i class="fa-solid fa-fire text-rose-500 mt-0.5 animate-pulse"></i>';
+
+            entry.innerHTML = `
+                <div>${icon}</div>
+                <div class="flex-1">
+                    <span class="text-gray-500 font-mono text-[10px] mr-1">[Day ${state.day}]</span>
+                    <span class="${type === 'danger' ? 'text-rose-300 font-bold' : 'text-gray-300'}">${msg}</span>
+                </div>
+            `;
+
+            logContainer.prepend(entry);
+        }
+
+        // CONCEPT MODAL HANDLERS
+        function showConceptModal(title, encodedConcept) {
+            const conceptText = decodeURIComponent(encodedConcept);
+            document.getElementById('concept-title').innerText = title;
+            document.getElementById('concept-body').innerText = conceptText;
+            document.getElementById('concept-modal').classList.remove('hidden');
+        }
+
+        function closeConceptModal() {
+            document.getElementById('concept-modal').classList.add('hidden');
+        }
+
+        function toggleInfoModal() {
+            const modal = document.getElementById('info-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        // GAME OVER / END SUMMARY LOGIC
+        function triggerEndGame(condition) {
+            const modal = document.getElementById('end-modal');
+            const badge = document.getElementById('end-rank-badge');
+            const title = document.getElementById('end-title');
+            const subtitle = document.getElementById('end-subtitle');
+            const evalText = document.getElementById('end-evaluation');
+
+            document.getElementById('end-temp').innerText = `+${state.temp.toFixed(3)}°C`;
+            document.getElementById('end-trust').innerText = `${Math.round(state.trust)}%`;
+            document.getElementById('end-co2').innerText = `${Math.round(state.co2)} ppm`;
+            document.getElementById('end-albedo').innerText = state.albedo.toFixed(3);
+
+            if (condition === 'defeat_temp' || condition === 'defeat_trust') {
+                badge.innerText = 'F';
+                badge.className = 'w-20 h-20 mx-auto rounded-full flex items-center justify-center text-4xl font-black bg-rose-950 text-rose-500 border-rose-600 shadow-2xl glow-calos';
+                title.innerText = '文明崩潰：4.0°C 終局';
+                subtitle.innerText = condition === 'defeat_temp' ? '全球升溫突破 +4.0°C 生存極限' : '全球氣候韌性歸零，社會秩序瓦解';
+                
+                evalText.innerHTML = `
+                    <strong class="text-rose-400 block mb-1">【地理學術診斷評估】</strong>
+                    卡洛斯成功觸發了多個關鍵氣候臨界點 (Tipping Points)。高溫引發了濕球溫度超過人體生理極限 (35°C)，亞馬遜雨林枯死轉為碳源，加上永凍層噴發巨量甲烷。這證明了氣候系統具有強烈的<strong>非線性正回饋屬性 (Non-linear Positive Feedbacks)</strong>。
+                `;
+            } else {
+                // Victory logic based on final temperature
+                if (state.temp <= 1.5) {
+                    badge.innerText = 'S';
+                    badge.className = 'w-20 h-20 mx-auto rounded-full flex items-center justify-center text-4xl font-black bg-emerald-950 text-emerald-400 border-emerald-500 shadow-2xl glow-kaia';
+                    title.innerText = '氣候救世者：巴黎協定完美達標';
+                    subtitle.innerText = '成功將全球升溫控制於 +1.5°C 內！';
+                    evalText.innerHTML = `
+                        <strong class="text-emerald-400 block mb-1">【S級優異評估 (HKDSE 5** 範本)】</strong>
+                        凱雅完美地結合了<strong>大氣減緩 (Mitigation)</strong> 與 <strong>氣候調適 (Adaptation)</strong>！你透過維護冰雪反照率 (Albedo) 阻絕了極地融冰正回饋，同時運用藍碳與自然解方 (NbS) 鎖住炭匯，成功守護了人類文明的永續未來。
+                    `;
+                } else if (state.temp <= 2.0) {
+                    badge.innerText = 'A';
+                    badge.className = 'w-20 h-20 mx-auto rounded-full flex items-center justify-center text-4xl font-black bg-teal-950 text-teal-400 border-teal-500 shadow-2xl';
+                    title.innerText = '氣候守護者：2°C 韌性防線';
+                    subtitle.innerText = '全球升溫成功壓制於 +2.0°C 安全邊界內';
+                    evalText.innerHTML = `
+                        <strong class="text-teal-400 block mb-1">【A級良好評估】</strong>
+                        你成功阻止了卡洛斯的惡意破壞！雖然部分珊瑚礁與海冰不可逆地受損，但你適時部署了濕球高溫防護與零碳轉型，避免了永凍層甲烷大爆發的致命連鎖反應。
+                    `;
+                } else {
+                    badge.innerText = 'C';
+                    badge.className = 'w-20 h-20 mx-auto rounded-full flex items-center justify-center text-4xl font-black bg-amber-950 text-amber-400 border-amber-500 shadow-2xl';
+                    title.innerText = '險勝：高風險氣候世界';
+                    subtitle.innerText = `全球升溫最終落在 +${state.temp.toFixed(2)}°C`;
+                    evalText.innerHTML = `
+                        <strong class="text-amber-400 block mb-1">【C級警示評估】</strong>
+                        雖然人類文明勉強存活，但升溫已超過 2.0°C 安全邊界。氣候難民潮與糧食減產造成了龐大的經濟負擔。未來需要更積極地投入負碳技術 (Negative Emission Technologies)。
+                    `;
+                }
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        // RESET GAME STATE
+        function resetGame() {
+            state = {
+                day: 1,
+                maxDays: 365,
+                temp: 1.200,
+                targetLimit: 4.0,
+                ap: 3,
+                maxAp: 3,
+                trust: 100,
+                co2: 421,
+                methane: 1910,
+                albedo: 0.300,
+                activePillar: 'p1',
+                tippingPointsTriggered: {
+                    tp15: false,
+                    tp20: false,
+                    tp25: false,
+                    tp30: false
+                }
+            };
+
+            document.getElementById('end-modal').classList.add('hidden');
+            document.getElementById('event-log').innerHTML = '<div class="text-gray-500 text-center py-4">2026 年 1 月 1 日：氣候終局對決正式開始。請選擇守護卡牌。</div>';
+            
+            updateCalosDialogue();
+            renderUI();
+        }
+
+        // INITIAL ONLOAD START
+        window.onload = () => {
+            renderUI();
+            updateCalosDialogue();
+        };
+    </script>
+</body>
+</html>
